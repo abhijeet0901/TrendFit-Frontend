@@ -4,7 +4,10 @@
 
 This project is a shopping website built using React, React Router, and Auth0 for authentication. Users can browse through various product categories, view product details, add items to the shopping cart, and proceed to checkout. Authentication is handled securely through Auth0, providing users with a personalized experience.
 
+![Alt text](image.png)
+
 ## Getting Started
+
 
 ### Prerequisites
 
