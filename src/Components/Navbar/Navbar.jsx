@@ -11,7 +11,7 @@ export const Navbar = () => {
     const { loginWithRedirect } = useAuth0();
       const { logout } = useAuth0();
 
-      const { user, isAuthenticated, isLoading } = useAuth0();
+      const { user, isAuthenticated } = useAuth0();
 
 
   return (
