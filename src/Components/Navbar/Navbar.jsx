@@ -1,26 +1,31 @@
-import React, { useContext, useState } from 'react'
-import './Navbar.css'
-import logo from '../Assets/logo.png'
-import cart_icon from '../Assets/cart_icon.png'
-import { Link } from 'react-router-dom'
-import { ShopContext } from '../../Context/ShopContext'
-import { useAuth0 } from '@auth0/auth0-react'
+import React, { useContext, useRef, useState } from "react";
+import "./Navbar.css";
+import logo from "../Assets/logo.png";
+import cart_icon from "../Assets/cart_icon.png";
+import { Link } from "react-router-dom";
+import { ShopContext } from "../../Context/ShopContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import nav_dropdown from '../Assets/dropdown_icon.png'
 export const Navbar = () => {
-    const [menu,setMenu]=useState("shop");
-    const{getTotalCartItems} = useContext(ShopContext);
-    const { loginWithRedirect } = useAuth0();
-      const { logout } = useAuth0();
+  const [menu, setMenu] = useState("shop");
+  const { getTotalCartItems } = useContext(ShopContext);
+  const { loginWithRedirect } = useAuth0();
+  const { logout } = useAuth0();
 
-      const { user, isAuthenticated } = useAuth0();
-
-
+  const { user, isAuthenticated } = useAuth0();
+  const menuRef=useRef()
+  const dropdown_toggle = (e)=>{
+    menuRef.current.classList.toggle('nav-menu-visible')
+    e.target.classList.toggle('open');
+  }
   return (
     <div className="navbar">
       <div className="nav-logo">
-        <img src={logo} alt="trendfit abhijeetdhar" />
+        <img  src={logo} alt="trendfit abhijeetdhar" />
         <p>TRENDFIT</p>
       </div>
-      <ul className="nav-menu">
+      <img className="nav-dropdown" onClick={dropdown_toggle} src={nav_dropdown} alt="" />
+      <ul ref={menuRef} className="nav-menu">
         <li
           onClick={() => {
             setMenu("shop");
@@ -65,8 +70,8 @@ export const Navbar = () => {
       <div className="nav-login-cart">
         {isAuthenticated ? (
           <>
-              <h4>{user.name}</h4>
-              <img src={user.img} />
+            <h4>{user.name}</h4>
+            <img src={user.img} />
             <button
               onClick={() =>
                 logout({ logoutParams: { returnTo: window.location.origin } })
@@ -89,5 +94,5 @@ export const Navbar = () => {
       </div>
     </div>
   );
-}
+};
 export default Navbar;
