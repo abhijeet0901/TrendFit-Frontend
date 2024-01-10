@@ -21,10 +21,15 @@ export const Navbar = () => {
   return (
     <div className="navbar">
       <div className="nav-logo">
-        <img  src={logo} alt="trendfit abhijeetdhar" />
+        <img src={logo} alt="trendfit abhijeetdhar" />
         <p>TRENDFIT</p>
       </div>
-      <img className="nav-dropdown" onClick={dropdown_toggle} src={nav_dropdown} alt="" />
+      <img
+        className="nav-dropdown"
+        onClick={dropdown_toggle}
+        src={nav_dropdown}
+        alt=""
+      />
       <ul ref={menuRef} className="nav-menu">
         <li
           onClick={() => {
@@ -71,7 +76,9 @@ export const Navbar = () => {
         {isAuthenticated ? (
           <>
             <h4>{user.name}</h4>
-            <img src={user.img} />
+            <img src={user.picture} id="userID" /> 
+            
+
             <button
               onClick={() =>
                 logout({ logoutParams: { returnTo: window.location.origin } })
