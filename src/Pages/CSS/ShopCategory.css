@@ -15,7 +15,7 @@
     border: 1px solid #888;
 
 }
-.shopcategory-indexSort p span{
+.shopcategory-indexSort p span {
     font-weight: 600;
 
 }
@@ -87,6 +87,6 @@
 @media(max-width:500px){
     .shopcategory-products{
         grid-template-columns: 1fr 1fr ;
-        
+
     }
 }
