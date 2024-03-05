@@ -5,30 +5,30 @@ import cart_icon from "../Assets/cart_icon.png";
 import { Link } from "react-router-dom";
 import { ShopContext } from "../../Context/ShopContext";
 import { useAuth0 } from "@auth0/auth0-react";
-import nav_dropdown from '../Assets/dropdown_icon.png'
+import nav_dropdown from "../Assets/dropdown_icon.png";
+
 export const Navbar = () => {
   const [menu, setMenu] = useState("shop");
   const { getTotalCartItems } = useContext(ShopContext);
-  const { loginWithRedirect } = useAuth0();
-  const { logout } = useAuth0();
+  const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
+  const menuRef = useRef();
 
-  const { user, isAuthenticated } = useAuth0();
-  const menuRef=useRef()
-  const dropdown_toggle = (e)=>{
-    menuRef.current.classList.toggle('nav-menu-visible')
-    e.target.classList.toggle('open');
-  }
+  const dropdown_toggle = (e) => {
+    menuRef.current.classList.toggle("nav-menu-visible");
+    e.target.classList.toggle("open");
+  };
+
   return (
     <div className="navbar">
       <div className="nav-logo">
-        <img src={logo} alt="trendfit abhijeetdhar" />
+        <img src={logo} alt="Trendfit Logo" />
         <p>TRENDFIT</p>
       </div>
       <img
         className="nav-dropdown"
         onClick={dropdown_toggle}
         src={nav_dropdown}
-        alt=""
+        alt="Dropdown"
       />
       <ul ref={menuRef} className="nav-menu">
         <li
@@ -39,7 +39,7 @@ export const Navbar = () => {
           <Link style={{ textDecoration: "none" }} to="/">
             Shop
           </Link>
-          {menu === "shop" ? <hr /> : <></>}
+          {menu === "shop" ? <hr /> : null}
         </li>
         <li
           onClick={() => {
@@ -49,7 +49,7 @@ export const Navbar = () => {
           <Link style={{ textDecoration: "none" }} to="/mens">
             Men
           </Link>
-          {menu === "mens" ? <hr /> : <></>}
+          {menu === "mens" ? <hr /> : null}
         </li>
         <li
           onClick={() => {
@@ -59,7 +59,7 @@ export const Navbar = () => {
           <Link style={{ textDecoration: "none" }} to="/womens">
             Women
           </Link>
-          {menu === "womens" ? <hr /> : <></>}
+          {menu === "womens" ? <hr /> : null}
         </li>
         <li
           onClick={() => {
@@ -69,16 +69,14 @@ export const Navbar = () => {
           <Link style={{ textDecoration: "none" }} to="/kids">
             Kids
           </Link>
-          {menu === "kids" ? <hr /> : <></>}
+          {menu === "kids" ? <hr /> : null}
         </li>
       </ul>
       <div className="nav-login-cart">
         {isAuthenticated ? (
           <>
             <h4>{user.name}</h4>
-            <img src={user.picture} id="userID" /> 
-            
-
+            <img src={user.picture} alt={user.name} />
             <button
               onClick={() =>
                 logout({ logoutParams: { returnTo: window.location.origin } })
@@ -94,7 +92,7 @@ export const Navbar = () => {
         )}
 
         <Link to="/cart">
-          <img src={cart_icon} alt="" />
+          <img src={cart_icon} alt="Shopping Cart" />
         </Link>
 
         <div className="nav-cart-count">{getTotalCartItems()}</div>
@@ -102,4 +100,5 @@ export const Navbar = () => {
     </div>
   );
 };
+
 export default Navbar;
